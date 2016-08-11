@@ -9,23 +9,31 @@
 import UIKit
 import PGoApi
 
-class ViewController: UIViewController, PGoAuthDelegate, PGoApiDelegate {
+class ViewController: UIViewController, PGoAuthDelegate {
 
-    var auth: PtcOAuth!
+    var auth: GPSOAuth!
     var request = PGoApiRequest()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        auth = PtcOAuth()
+        auth = GPSOAuth()
         auth.delegate = self
-        auth.login(withUsername: "", withPassword: "")
+        auth.login(withUsername: "harsh.singh@pointclickcare.com", withPassword: "Aman-2392")
     }
     
     func didReceiveAuth() {
         print("Auth received!!")
+        simulateAppStartAndMakeLoginRequest()
+    }
+    
+    func didNotReceiveAuth() {
+        print("Failed to auth!")
+    }
+    
+    func simulateAppStartAndMakeLoginRequest() {
         print("Starting simulation...")
-
+        
         // Init with auth
         request = PGoApiRequest(auth: auth)
         
@@ -34,32 +42,30 @@ class ViewController: UIViewController, PGoAuthDelegate, PGoApiDelegate {
         
         // Simulate the start
         request.simulateAppStart()
-        request.makeRequest(.Login, delegate: self)
+        request.makeRequest(.Login, completion: {
+            responseIntent, status, response in
+            if status == .Success {
+                self.getMapObjects()
+            }
+        })
     }
     
-    func didNotReceiveAuth() {
-        print("Failed to auth!")
-    }
     
-    func didReceiveApiResponse(intent: PGoApiIntent, response: PGoApiResponse) {
-        print("Got that API response: \(intent)")
-        if (intent == .Login) {
-            request.getMapObjects()
-            request.makeRequest(.GetMapObjects, delegate: self)
-        } else if (intent == .GetMapObjects) {
-            print("Got map objects!")
-            print(response.response)
-            print(response.subresponses)
-            let r = response.subresponses[0] as! Pogoprotos.Networking.Responses.GetMapObjectsResponse
-            let cell = r.mapCells[0]
-            print(cell.nearbyPokemons)
-            print(cell.wildPokemons)
-            print(cell.catchablePokemons)
-        }
-    }
-    
-    func didReceiveApiError(intent: PGoApiIntent, statusCode: Int?) {
-        print("API Error: \(statusCode)")
+    func  getMapObjects() {
+        self.request.getMapObjects()
+        self.request.makeRequest(.GetMapObjects, completion: {
+            responseIntent, status, response in
+            if (status! == .Success){
+                print("Got map objects!")
+                print(response!.response)
+                print(response!.subresponses)
+                let r = response!.subresponses[0] as! Pogoprotos.Networking.Responses.GetMapObjectsResponse
+                let cell = r.mapCells[0]
+                print(cell.nearbyPokemons)
+                print(cell.wildPokemons)
+                print(cell.catchablePokemons)
+            }
+        })
     }
 
 }
