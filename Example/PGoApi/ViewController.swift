@@ -19,7 +19,7 @@ class ViewController: UIViewController, PGoAuthDelegate {
 
         auth = GPSOAuth()
         auth.delegate = self
-        auth.login(withUsername: "harsh.singh@pointclickcare.com", withPassword: "Aman-2392")
+        auth.login(withUsername: "", withPassword: "")
     }
     
     func didReceiveAuth() {
