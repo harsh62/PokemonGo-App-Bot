@@ -133,7 +133,7 @@ class PGoRpcApi {
         let signatureBuilder = Pogoprotos.Networking.Envelopes.Signature.Builder()
         
         for subrequest in subrequests {
-            print("Processing \(subrequest)...")
+//            print("Processing \(subrequest)...")
             let subrequestBuilder = Pogoprotos.Networking.Requests.Request.Builder()
             subrequestBuilder.requestType = subrequest.id
             subrequestBuilder.requestMessage = subrequest.message.data()

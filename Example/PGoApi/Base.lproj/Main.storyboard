@@ -3,12 +3,13 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Maps-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="PGoApi_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="MapViewController" customModule="PGoApi_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -16,9 +17,23 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gtC-pg-k8z">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="gtC-pg-k8z" secondAttribute="bottom" id="1r1-MW-0L0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gtC-pg-k8z" secondAttribute="trailing" constant="-20" id="Oww-dw-ei5"/>
+                            <constraint firstItem="gtC-pg-k8z" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="gP0-dc-RPo"/>
+                            <constraint firstItem="gtC-pg-k8z" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-20" id="mlN-Hn-qIJ"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="DyJ-xs-NXu"/>
+                    <tabBarItem key="tabBarItem" title="Maps" image="Map Logo" id="DyJ-xs-NXu"/>
+                    <connections>
+                        <outlet property="mapView" destination="gtC-pg-k8z" id="ig9-L9-cHu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
@@ -148,5 +163,6 @@
     </scenes>
     <resources>
         <image name="Logo" width="1200" height="628"/>
+        <image name="Map Logo" width="16" height="16"/>
     </resources>
 </document>

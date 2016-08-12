@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		5A9C87C31D5D3EE50092E21C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9C87C21D5D3EE50092E21C /* LoginViewController.swift */; };
+		5A9C87C61D5D54B90092E21C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A9C87C51D5D54B90092E21C /* MapKit.framework */; };
+		5A9C87C91D5D56240092E21C /* PokemonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9C87C81D5D56240092E21C /* PokemonService.swift */; };
 		5B83BE4966506D8610265D63 /* Pods_PGoApi_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B61A04809202E68CF8BC656 /* Pods_PGoApi_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
+		607FACD81AFB9204008FA782 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* MapViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
@@ -31,10 +33,12 @@
 /* Begin PBXFileReference section */
 		37629CDE1FF91C1BC75F9C04 /* Pods-PGoApi_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PGoApi_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-PGoApi_Example/Pods-PGoApi_Example.release.xcconfig"; sourceTree = "<group>"; };
 		5A9C87C21D5D3EE50092E21C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Controllers/LoginViewController.swift; sourceTree = "<group>"; };
+		5A9C87C51D5D54B90092E21C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		5A9C87C81D5D56240092E21C /* PokemonService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonService.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* PGoApi_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PGoApi_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		607FACD71AFB9204008FA782 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -56,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A9C87C61D5D54B90092E21C /* MapKit.framework in Frameworks */,
 				5B83BE4966506D8610265D63 /* Pods_PGoApi_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,9 +79,18 @@
 		5A9C87C41D5D3EF10092E21C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				607FACD71AFB9204008FA782 /* MapViewController.swift */,
 				5A9C87C21D5D3EE50092E21C /* LoginViewController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		5A9C87C71D5D55C80092E21C /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				5A9C87C81D5D56240092E21C /* PokemonService.swift */,
+			);
+			name = Service;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
@@ -103,9 +117,9 @@
 		607FACD21AFB9204008FA782 /* Example for PGoApi */ = {
 			isa = PBXGroup;
 			children = (
+				5A9C87C71D5D55C80092E21C /* Service */,
 				5A9C87C41D5D3EF10092E21C /* Controllers */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -153,6 +167,7 @@
 		A3ECF49FD671BDB3FBFD32C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5A9C87C51D5D54B90092E21C /* MapKit.framework */,
 				6B61A04809202E68CF8BC656 /* Pods_PGoApi_Example.framework */,
 				68719A6E9BEB3505427181EB /* Pods_PGoApi_Tests.framework */,
 			);
@@ -467,7 +482,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A9C87C31D5D3EE50092E21C /* LoginViewController.swift in Sources */,
-				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				5A9C87C91D5D56240092E21C /* PokemonService.swift in Sources */,
+				607FACD81AFB9204008FA782 /* MapViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

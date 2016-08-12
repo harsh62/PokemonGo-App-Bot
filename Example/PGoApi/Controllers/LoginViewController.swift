@@ -27,22 +27,29 @@ class LoginViewController: UIViewController, PGoAuthDelegate {
     }
     
     func didReceiveAuth() {
+        //Set user defaults
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setValue(usernameTextField.text!, forKey: "username")
         defaults.setValue(passwordTextField.text!, forKey: "password")
         defaults.setInteger(segmentControl.selectedSegmentIndex, forKey: "loginAccountType")
         defaults.synchronize()
-        self.performSegueWithIdentifier("loginToHome", sender: nil)
+        
+        //set singleton auth 
+        PokemonService.sharedInstance.auth = segmentControl.selectedSegmentIndex == 0 ? ptcAuth : googleAuth
+        PokemonService.sharedInstance.login({
+            response, status in
+            if status == .Success{
+                //perform segue
+                self.performSegueWithIdentifier("loginToHome", sender: nil)
+            }
+            else {
+                self.showLoginFailureAlert()
+            }
+        })
     }
     
     func didNotReceiveAuth() {
-        let alertController = UIAlertController(title: "Error!", message: "Failed to login.\nPlease check your credentials and type of login you are trying to attempt.", preferredStyle: .Alert)
-        let alertAction = UIAlertAction(title: "ok", style: .Default, handler: {
-            action in
-            alertController.dismissViewControllerAnimated(true, completion: nil)
-        })
-        alertController.addAction(alertAction)
-        presentViewController(alertController, animated: true, completion: nil)
+        showLoginFailureAlert()
     }
     
     
@@ -92,5 +99,16 @@ class LoginViewController: UIViewController, PGoAuthDelegate {
         usernameTextField.text = defaults.stringForKey("username")
         passwordTextField.text = defaults.stringForKey("password")
         segmentControl.selectedSegmentIndex = defaults.integerForKey("loginAccountType")
+    }
+    
+    func showLoginFailureAlert() {
+        let alertController = UIAlertController(title: "Error!", message: "Failed to login.\nPlease check your credentials and type of login you are trying to attempt.", preferredStyle: .Alert)
+        let alertAction = UIAlertAction(title: "ok", style: .Default, handler: {
+            action in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        })
+        alertController.addAction(alertAction)
+        presentViewController(alertController, animated: true, completion: nil)
+
     }
 }
