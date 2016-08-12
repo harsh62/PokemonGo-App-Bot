@@ -1,4 +1,4 @@
-# PokemonGo-App-Bot - a Pokemon Go App Bot 
+# PokemonGo-App-Bot
 using the PokemonGo API library for Swift
 
 The purpose of the app would be to create a Bot using the Application itself. 
