@@ -17,9 +17,9 @@ class ViewController: UIViewController, PGoAuthDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        auth = GPSOAuth()
-        auth.delegate = self
-        auth.login(withUsername: "", withPassword: "")
+//        auth = GPSOAuth()
+//        auth.delegate = self
+//        auth.login(withUsername: "", withPassword: "")
     }
     
     func didReceiveAuth() {
