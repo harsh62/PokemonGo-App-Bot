@@ -49,5 +49,13 @@ class PokemonService {
         })
     }
     
+    func updateLocation(completion:(response:PGoApiResponse?, status: PGoApiStatus?) -> Void) {
+        self.request.updatePlayer()
+        self.request.makeRequest(.PlayerUpdate, completion: {
+            responseIntent, status, response in
+            completion(response: response, status: status)
+        })
+    }
+    
     
 }

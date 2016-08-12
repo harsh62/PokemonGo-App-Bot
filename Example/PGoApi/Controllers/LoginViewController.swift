@@ -56,6 +56,10 @@ class LoginViewController: UIViewController, PGoAuthDelegate {
     
     @IBAction func Login(sender: UIButton) {
         
+        if let text = usernameTextField.text {
+            print(text)
+        }
+        
         if areTextFieldsEmpty() {
             let alertController = UIAlertController(title: "Username or password not entered", message: "Don't try to be clever, we need the username and the password to login for you.", preferredStyle: .Alert)
             let alertAction = UIAlertAction(title: "ok", style: .Default, handler: {
@@ -105,10 +109,14 @@ class LoginViewController: UIViewController, PGoAuthDelegate {
         let alertController = UIAlertController(title: "Error!", message: "Failed to login.\nPlease check your credentials and type of login you are trying to attempt.", preferredStyle: .Alert)
         let alertAction = UIAlertAction(title: "ok", style: .Default, handler: {
             action in
-            alertController.dismissViewControllerAnimated(true, completion: nil)
+//            alertController.dismissViewControllerAnimated(true, completion: nil)
         })
         alertController.addAction(alertAction)
         presentViewController(alertController, animated: true, completion: nil)
 
+        
+        
     }
+    
+
 }

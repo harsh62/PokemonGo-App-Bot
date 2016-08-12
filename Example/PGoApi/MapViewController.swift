@@ -37,7 +37,28 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
         let location = gestureReconizer.locationInView(mapView)
         let coordinate = mapView.convertPoint(location,toCoordinateFromView: mapView)
         PokemonService.sharedInstance.updateLocation(coordinate.latitude, long: coordinate.longitude)
-        getMapObjects()
+        updatePlayerLocation()
+        
+    }
+    
+    func updatePlayerLocation() {
+        PokemonService.sharedInstance.updateLocation({
+            response, status in
+            if (status! == .Success){
+                let parsedResponse = response?.subresponses as! [Pogoprotos.Networking.Responses.PlayerUpdateResponse]
+                print(parsedResponse)
+                for mapCell in parsedResponse {
+                    for pokemon in mapCell.wildPokemons {
+                        print(pokemon.pokemonData.pokemonId)
+                    }
+                }
+                for mapCell in parsedResponse {
+                    for fort in mapCell.forts {
+                        print(fort.types.toString())
+                    }
+                }
+            }
+        })
     }
     
     
@@ -57,19 +78,36 @@ class MapViewController: UIViewController, MKMapViewDelegate, UIGestureRecognize
 
                 for pokemon in mapCell.catchablePokemons {
                     print(pokemon.pokemonId)
+                    addToMap(pokemon.latitude, long: pokemon.longitude, title: pokemon.pokemonId.toString())
                 }
                 for pokemon in mapCell.wildPokemons {
                     print(pokemon.pokemonData.pokemonId)
+                    addToMap(pokemon.latitude, long: pokemon.longitude, title: pokemon.pokemonData.pokemonId.toString())
                 }
                 for pokemon in mapCell.nearbyPokemons {
                     print(pokemon.pokemonId)
+//                    addToMap(pokemon., long: pokemon.longitude, title: pokemon.pokemonId.toString())
+                }
+                for fort in mapCell.forts {
+                    print(fort.types.toString())
+                    addToMap(fort.latitude, long: fort.longitude, title: fort.types.toString())
                 }
             }
         }
     }
     
+    
+    
     func updateMapWithAllPokemons(){
         
+    }
+    
+    func addToMap(lat:Double, long: Double, title: String) {
+        // Drop a pin
+        let dropPin = MKPointAnnotation()
+        dropPin.coordinate = CLLocationCoordinate2DMake(lat, long)
+        dropPin.title = title
+        mapView.addAnnotation(dropPin)
     }
 
 }
